@@ -1,0 +1,56 @@
+{% extends "base1.html" %}
+
+{% block title %}
+  Dashboard
+{% endblock %}
+{% load static %}
+{% block additional_styles %}
+<style>
+   body {
+    background-image: url({% static "sentianalyzer.jpg" %});
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+</style>
+{% endblock %}
+
+{% block content %}
+  <h1 style="text-align: center; color:white;">Hi {{request.user.username}} welcome  to your dashboard</h1> <br><br>
+
+  <h3></h3>
+  <div class="container" >
+  <table class="table table-bordered" >
+    <thead>
+      <tr >
+        <th scope="col">S.no</th>
+        <th scope="col">Content</th>
+        <th scope="col">Description</th>
+        <th scope="col">Youtube link</th>
+        <th colspan="2">Actions</th>
+        
+      </tr>
+    </thead>
+    <tbody>{% for i in data %}
+      <tr>
+        
+        <th scope="row">{{forloop.counter}}</th>
+        
+        <td>{{i.content_name}}</td>
+        <td>{{i.content_description}}</td>
+        <td>{{i.video_url}}</td>
+        
+        
+        
+        
+        
+        <td><a  class="btn btn-warning" role="button" href="{% url 'view_content' i.video_url %}">View</a></td>
+        <td><a  class="btn btn-danger" role="button" href="{% url 'delete_row' i.id %}">Delete</a></td>
+
+      </tr>
+      {%endfor%}
+      
+    </tbody>
+  </table>
+</div>
+  
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base1.html" %}
+
+{% block title %}
+  Home 
+{% endblock %}
+
+{% load static %}
+{% block additional_styles %}
+<style>
+   body {
+    background-image: url({% static "homepic.png" %});
+    background-size: cover;
+    background-repeat: no-repeat; 
+
+   }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+{% endblock %}
+
+
+    
+
+{% block content %}
+  <!-- Create a div to contain your content -->
+  <div style="margin-top: 120px; margin-left: 230px;">
+    <h1 style="color:white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 10px;">Hello {{request.user.username}},</h1>
+</div>
+
+
+{% endblock %}
+

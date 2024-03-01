@@ -1,0 +1,40 @@
+{% extends "base1.html" %}
+
+{% block title %}
+  Sentiment Analysis Results
+{% endblock %}
+
+{% load static %}
+{% block additional_styles %}
+<style>
+   body {
+    background-image: url({% static "Designer.png" %});
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 50px;">
+  <div style="display: flex; justify-content: space-around;">
+    {% if chart_path %}
+      <div >
+        <h1 style="margin-left: 100px;">Sentiment Analysis Results </h1>
+        <img src="{% static "pie_chart.jpeg" %}" alt="Sentiment Analysis Pie Chart">
+      </div>
+    {% endif %}
+    
+    {% if chart_path1 %}
+      <div>
+        <h1 style="margin-left: 140px">Hate Speech Results </h1>
+        <img src="{% static "Bar_chart.jpeg" %}" alt="Hate Speech Bar Chart">
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+  {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base1.html" %}
+
+{% block title %}
+analyzer
+{% endblock %}
+{% load static %}
+{% block additional_styles %}
+<style>
+   body {
+    background-image: url({% static "analyzer.jpg" %});
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if error_messages %}
+  {% for error_message in error_messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ error_message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<section class="main-container" style="margin-top:30px ">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card cardreg" style="background: rgba( 255, 255, 255, 0.2 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 4px );
+            -webkit-backdrop-filter: blur( 4px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );">
+              <div class="card-body p-5">
+                <form method="post" enctype="multipart/form-data" action="{% url 'analyze_content' %}" style="font-family:Arial, Helvetica, sans-serif;">
+                    {% csrf_token %}
+                    <label for="content_name"><b>Content Name:</b></label><br>{{ form.content_name }}
+                    <input type="text" id="content_name" name="content_name" class="form-control" required><br><br>
+                    
+                    <label for="content_description"><b>Content Description:</b></label><br>
+                    <textarea id="content_description" name="content_description" class="form-control" required></textarea><br><br>
+                    
+                    <label for="video_url"><b>YouTube Video URL:</b></label><br>
+                    <input type="text" id="video_url" class="form-control" name="video_url"><br>
+                    
+                    {% comment %} <h5 style="text-align: center;">OR</h5> <br>
+                    <div >
+                        <label for="file_uploaded"><b>Upload a csv or excel file:</b></label>
+                        <input type="file" name="file"  style="margin-left: 20px;" > <br><br><i ></i>
+                    {% endcomment %}
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit"  style="background-color:#ed6a5e; border-radius:5px; height:40px; width:100px"><b>Submit</b></button>
+                    </div>
+                    <br>
+
+                    
+                </form>
+                
+                {% if error_message %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+{% endblock %}

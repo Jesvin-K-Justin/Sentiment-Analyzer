@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% load static %}
+{% block additional_styles %}
+<style>
+   body {
+    background-image: url({% static "register.png" %});
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% elif message.tags == 'success' %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">{{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% else %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">{{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% endfor %}
+{% endif %}
+
+
+
+
+
+  <section class="main-container" style="margin-top:20px ">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card cardreg" style="background-image: url({% static "register.png" %});border-radius: 25px;background: rgba( 255, 255, 255, 0.15 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 1.5px );
+            -webkit-backdrop-filter: blur( 1.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5" style="color: white;">Register to explore us</h2>
+  
+                <form method="post" action="{% url 'register_user' %}">
+                  {% csrf_token %}
+                  <div class="form-outline mb-4">
+                    <label for="" class="form-label" style="color: white;"><b>User name</b></label>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      class="form-control"
+                      placeholder="Enter username"
+                      required
+                    />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label for="" class="form-label" style="color: white;"><b>Email Id</b></label>
+                    <input
+                      type="Email"
+                      name="email"
+                      id="email"
+                      class="form-control"
+                      placeholder="Enter Email Id"
+                      required
+                    />
+                  </div>
+                  
+  
+                  <div class="form-outline mb-4">
+                    <label for="" class="form-label"style="color: white;"><b>Password</b></label
+                    ><input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Enter password"
+                      required
+                    />
+                  </div>
+                  
+                  <div class="form-outline mb-4">
+                    <label for="" class="form-label"style="color: white;"><b>Confirm Password</b></label
+                    ><input
+                      type="password"
+                      name="cnf_password"
+                      id="cnf_password"
+                      class="form-control"
+                      placeholder="Enter password"
+                      required
+                    />
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      class="btn btnreg btn-block btn-lg gradient-custom-4 text-body" style="background-color:#ed6a5e;"
+                    >
+                      Register
+                    </button>
+                  </div>
+                  <p class="text-center text-muted mt-3 mb-0" style="color: white !important; margin-top: 10px;">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="fw-bold text-body" style="color: white !important;">
+                        <u style="color: white !important;"><b> Login</b></u>
+                    </a>
+                </p>
+                
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  
+  
+  
+{% endblock %}
